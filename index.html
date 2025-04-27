@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Course Platform | Master Web Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Course Hero Section */
+        .course-hero {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .video-wrapper {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            background: #000;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Course Meta */
+        .course-meta {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0;
+        }
+
+        .enroll-btn {
+            background: var(--gradient);
+            color: white;
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .module {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .module-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: #f8fafc;
+            border-radius: 0.75rem;
+        }
+
+        .module:hover {
+            transform: translateX(5px);
+            border-color: var(--primary);
+        }
+
+        .module-content {
+            padding: 1.5rem;
+            display: grid;
+            gap: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .lesson:hover {
+            background: #f1f5f9;
+        }
+
+        /* Instructor Section */
+        .instructor-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .instructor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Media Gallery */
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .media-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .course-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .course-meta {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .price-tag {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utility Classes */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background: #e2e8f0;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #f59e0b;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Course Hero Section -->
+        <section class="course-hero">
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/WxM5eTHEWzs" 
+                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Course Meta Sidebar -->
+            <aside class="course-meta">
+                <div class="flex-between">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        4.9 (12.5K reviews)
+                    </div>
+                    <span class="badge">Bestseller</span>
+                </div>
+                
+                <div class="price-tag">৳2000</div>
+                
+                <ul class="course-features">
+                    <li class="lesson"><i class="fas fa-play-circle"></i> 40 hours video</li>
+                    <li class="lesson"><i class="fas fa-file-alt"></i> 25 resources</li>
+                    <li class="lesson"><i class="fas fa-infinity"></i> Lifetime access</li>
+                    <li class="lesson"><i class="fas fa-mobile-alt"></i> Mobile friendly</li>
+                </ul>
+
+                <button class="enroll-btn">
+                    <i class="fas fa-shopping-cart"></i> Enroll Now
+                </button>
+            </aside>
+        </section>
+
+        <!-- Instructor Section -->
+        <div class="instructor-card">
+            <img src="https://i.postimg.cc/BbLD62fb/img-3-1745738181090.jpg" alt="Instructor" class="instructor-avatar">
+            <div>
+                <h3>Dr. Subbir</h3>
+                <p>Teacher FROM SSMC</p>
+                <div class="rating mt-1">
+                    <i class="fas fa-star"></i>
+                    4.95 Instructor Rating
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Gallery -->
+        <div class="media-gallery">
+            <div class="media-item">
+                <img src="https://img.youtube.com/vi/WxM5eTHEWzs/maxresdefault.jpg" alt="Course Preview">
+            </div>
+            <div class="media-item">
+                <img src="https://img.youtube.com/vi/Es9X1du3SVM/maxresdefault.jpg" alt="Course Preview">
+                
+                
+            </div>
+            <div class="media-item">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Es9X1du3SVM" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Curriculum -->
+        <section class="curriculum">
+            <h2>What You'll Learn</h2>
+            <div class="module">
+                <div class="module-header">
+                    <span>Module 1: MEDICAL COMPLETE PREPARATION</span>
+                    <span>6 Lessons • 4h 20m</span>
+                </div>
+                <div class="module-content">
+                    <div class="lesson">
+                        <i class="fas fa-play-circle"></i>
+                        ES6+ Features Deep Dive
+                        <span class="badge">Free Preview Exam</span>
+                    </div>
+                    <!-- Add more lessons -->
+                </div>
+            </div>
+            <!-- Add more modules -->
+        </section>
+    </div>
+</body>
+</html>
